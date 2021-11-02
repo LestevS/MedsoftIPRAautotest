@@ -1,9 +1,15 @@
 package tests.positive;
+
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
+import org.openqa.selenium.support.FindBy;
 
+import static com.codeborne.selenide.Condition.text;
+import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
+import static com.codeborne.selenide.files.DownloadActions.click;
 import static constants.constants.*;
+import org.openqa.selenium.Keys;
 
 public class CreateNewRefferal {
     @Test
@@ -32,9 +38,35 @@ public class CreateNewRefferal {
         //Выбор пола пациента
         $(By.id("patient.snils")).setValue(patSnils);
         //Ввод СНИЛС пациента
-
+        $(By.id("patient.citizenshipFull.recid")).selectOption("гражданин Российской Федерации");
+        //Выбор гражданства
+        $(By.name("patient.identityDoc.documentType.recid")).selectOption(" Паспорт гражданина России");
+        //Выбор типа документа
+        $(By.id("patient.identityDoc.series")).setValue(patientIdentityDocSeries);
+        //Ввод серии документа удостоверяющего личность
+        $(By.id("patient.identityDoc.number")).setValue(patientIdentityDocNumber);
+        //Ввод номера документа удостоверяющего личность
+        $(By.id("patient.identityDoc.issuer")).setValue(patientIdentityDocIssuer);
+        //Ввод органа выдавшего документ
+        $(By.id("patient.identityDoc.issueDate")).setValue(patientIdentityDocIssueDate);
+        //Ввод даты выдачи документа
+        $(By.id("patient.livingAddressFull.territorySubject.recid_search")).setValue("Липецкая область");
+        //Ввод субьекта
+        $(byText("Липецкая область")).click();
+        //Выбор субьекта из всплывающего списка
+        $(By.id("patient.livingAddressFull.zipCode")).setValue(patientLivingAddressFullZipCode);
+        //Ввод почтового индекса
+        $(By.id("patient.livingAddressFull.house")).setValue(patientLivingAddressFullHouse);
+        //Ввод номера дома
+        $(By.id("patient.livingAddressFull.corpus")).setValue(patientLivingAddressFullCorpus);
+        //Ввод номер корпуса дома
+        $(By.id("patient.livingAddressFull.building")).setValue(patientLivingAddressFullBuilding);
+        //Ввод номера строения
+        $(By.id("patient.livingAddressFull.appartment")).setValue(patientLivingAddressFullAppartment);
+        //Ввод номера квартиры
 
         String pngFileName = screenshot("my_file_name");
+
 
     }
 
