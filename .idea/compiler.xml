@@ -7,6 +7,7 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="IPRAtestSelenide" />
+        <module name="MedsoftIPRAautotest" />
         <module name="MedsoftIPRAautotrest" />
       </profile>
     </annotationProcessing>

@@ -9,6 +9,7 @@ import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
 import static com.codeborne.selenide.files.DownloadActions.click;
 import static constants.constants.*;
+
 import org.openqa.selenium.Keys;
 
 public class CreateNewRefferal {
@@ -50,6 +51,9 @@ public class CreateNewRefferal {
         //Ввод органа выдавшего документ
         $(By.id("patient.identityDoc.issueDate")).setValue(patientIdentityDocIssueDate);
         //Ввод даты выдачи документа
+
+        //Метод проверки чекбокса-без определенного места жительства
+
         $(By.id("patient.livingAddressFull.territorySubject.recid_search")).setValue("Липецкая область");
         //Ввод субьекта
         $(byText("Липецкая область")).click();
@@ -64,6 +68,34 @@ public class CreateNewRefferal {
         //Ввод номера строения
         $(By.id("patient.livingAddressFull.appartment")).setValue(patientLivingAddressFullAppartment);
         //Ввод номера квартиры
+        $(By.name("patient.livingAddressFull.addressType.recid")).click();
+        //Выбор строки Тип адреса
+        $(byText("Адрес места жительства")).click();
+        //Выбор типа адреса
+        $(By.xpath("//*[@id=\"patientLocationOgrn\"]")).scrollIntoView(false);
+        //Скролл вниз
+        $(By.id("patient.livingAddressFull.district_search")).click();
+        //Выбор строки район
+        $(byText("город субъектового подчинения")).click();
+        //Выбор района
+        $(By.id("patient.livingAddressFull.place_search")).click();
+        //Выбор строки Населенный пункт
+        $(byText("Липецк г")).click();
+        //Выбор населенного пункта
+        $(By.id("patient.livingAddressFull.street_search")).click();
+        //Выбор строки Улица
+        $(byText("Гагарина ул")).click();
+        //Выбор улицы
+        $(By.id("patient.livingAddressFull.house")).setValue("10");
+        //Выбор строки Дом,ввод номера дома
+        $(By.id("patient.livingAddressFull.appartment")).setValue("666");
+        //Выбор строки квартира,ввод номера квартиры
+        $(By.name("patientLocationType.recid")).click();
+        //Выбор строки Тип местоположения
+        $(byText("В медицинской организации, оказывающей медицинскую помощь в стационарных условиях")).click();
+        //Выбор типа местоположения
+        $(By.id("patientLocationAddress.zipCode")).setValue(patientLocationAddressZipCode2);
+        //Ввод почтового индекса местоположения
 
         String pngFileName = screenshot("my_file_name");
 

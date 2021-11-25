@@ -23,7 +23,7 @@ public final class constants {
     public static String patientLivingAddressFullCorpus = "3";
     public static String patientLivingAddressFullBuilding = "1";
     public static String patientLivingAddressFullAppartment = "79";
-
+    public static String patientLocationAddressZipCode2 = "398001";
 
 
 }
