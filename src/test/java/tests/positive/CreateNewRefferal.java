@@ -5,6 +5,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.support.FindBy;
 
 import static com.codeborne.selenide.Condition.text;
+import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
 import static com.codeborne.selenide.files.DownloadActions.click;
@@ -53,6 +54,16 @@ public class CreateNewRefferal {
         //Ввод даты выдачи документа
 
         //Метод проверки чекбокса-без определенного места жительства
+        $(By.id("patientLocationAddress.zipCode")).click();
+        //Клик по полю Почтовый индекс,для скрытия календаря Дата выдачи документа и открытия видимости чек бокса
+        $(By.id("patient.hasNoLivingAddress")).setSelected(true);
+        //выставление значения в чек боксе -без определенного метса жительства true
+        $(By.id("patient.livingAddressFull")).shouldNotBe(visible);
+        //Проверка что необходимый элемент перстал быть видимым
+        $(By.id("patient.hasNoLivingAddress")).setSelected(false);
+        //выставление значения в чек боксе -без определенного метса жительства false
+
+
 
         $(By.id("patient.livingAddressFull.territorySubject.recid_search")).setValue("Липецкая область");
         //Ввод субьекта
