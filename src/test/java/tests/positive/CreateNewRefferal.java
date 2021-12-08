@@ -1,7 +1,11 @@
 package tests.positive;
 
+import com.codeborne.selenide.Configuration;
+import org.junit.Before;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.FindBy;
 
 import static com.codeborne.selenide.Condition.text;
@@ -59,7 +63,7 @@ public class CreateNewRefferal {
         $(By.id("patient.hasNoLivingAddress")).setSelected(true);
         //выставление значения в чек боксе -без определенного метса жительства true
         $(By.id("patient.livingAddressFull")).shouldNotBe(visible);
-        //Проверка что необходимый элемент перстал быть видимым
+        //Проверяем, что необходимый элемент перстал быть видимым
         $(By.id("patient.hasNoLivingAddress")).setSelected(false);
         //выставление значения в чек боксе -без определенного метса жительства false
 
@@ -103,10 +107,47 @@ public class CreateNewRefferal {
         //Выбор строки квартира,ввод номера квартиры
         $(By.name("patientLocationType.recid")).click();
         //Выбор строки Тип местоположения
+
+        $(By.id("patient.millitaryDuty.recid")).scrollIntoView(false);
+        //Скролл вниз
+
+        //Проверка блокировки строк ввода места положения при выборе -По месту жительства(по месту прибывания...)
+
+        $(byText("По месту жительства (по месту пребывания, фактического проживания на территории Российской Федерации)")).click();
+        //Выбор опции
+        $(By.name("patientLocationAddress")).shouldNotBe(visible);
+        //Проверяем, что необходимый элемент перстал быть видимым
+
+        $(By.name("patientLocationType.recid")).click();
+        //Выбор строки Тип местоположения
         $(byText("В медицинской организации, оказывающей медицинскую помощь в стационарных условиях")).click();
         //Выбор типа местоположения
         $(By.id("patientLocationAddress.zipCode")).setValue(patientLocationAddressZipCode2);
         //Ввод почтового индекса местоположения
+
+        $(By.id("patientLocationAddress.territorySubject.recid_search")).setValue("Липецкая область");
+        //Ввод субьекта
+        $(byText("Липецкая область")).click();
+        //Выбор субьекта из всплывающего списка
+        $(By.id("patientLocationAddress.district_search")).click();
+        //Выбор строки район
+        $(By.xpath("//*[@id=\"w2ui-overlay\"]/div/div/table/tbody/tr[1]/td[1]")).click();
+        //Выбор района
+        $(By.id("patientLocationAddress.place_search")).click();
+        //Выбор строки Населенный пункт
+        $(By.xpath("//*[@id=\"w2ui-overlay\"]/div/div/table/tbody/tr[2]/td[1]")).click();
+        //Выбор населенного пункта
+        $(By.id("patientLocationAddress.street_search")).click();
+        //Выбор строки Улица
+        $(byText("Московская ул")).click();
+        //Выбор улицы
+        $(By.id("patientLocationAddress.house")).setValue("5А");
+        //Выбор строки Дом,ввод номера дома
+        $(By.id("patientLocationOgrn")).setValue(patientLocationOgrn);
+        //Ввод ОГРН орг-ции
+
+        $(By.id("educationProfession")).scrollIntoView(false);
+        //Скролл вниз
 
         String pngFileName = screenshot("my_file_name");
 
